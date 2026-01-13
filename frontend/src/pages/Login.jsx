@@ -4,7 +4,7 @@ import { login as loginApi } from '../api/authApi';
 import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
-  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,10 +17,10 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await loginApi(userName, password);
+      const response = await loginApi(email, password);
       const { token, userName: user } = response.data;
-      
-      login({ userName: user }, token);
+      console.log(response);
+      login({ userName: user, email }, token);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
@@ -49,16 +49,16 @@ export default function Login() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Username */}
+            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
-                Username
+                Email
               </label>
               <input
-                type="text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                placeholder="Enter your username"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
                 className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                 required
               />

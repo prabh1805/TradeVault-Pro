@@ -12,7 +12,7 @@ public interface HoldingRepository extends MongoRepository<Holding, String> {
     List<Holding> findByUserId(String userId);
 
     //Find by userId and Symbol
-    List<Holding> findByUserAndSymbol(String userId, String symbol);
+    List<Holding> findByUserIdAndSymbol(String userId, String symbol);
 
     //Find by exchange
     List<Holding> findByUserIdAndExchange(String userId, String exchange);

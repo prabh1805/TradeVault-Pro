@@ -35,7 +35,7 @@ public class AuthenticationController {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUserName(),
+                        loginRequest.getEmail(),
                         loginRequest.getPassword()
                 )
         );
@@ -48,7 +48,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(
                 AuthenticationResponse.builder()
                         .token(jwtToken)
-                        .userName(userDetails.getUsername())
+                        .email(userDetails.getUsername())
                         .build()
         );
     }
@@ -73,7 +73,7 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(AuthenticationResponse.builder()
                 .token(jwtToken)
-                .userName(user.getUserName())
+                .email(user.getEmail())
                 .build());
 
     }
